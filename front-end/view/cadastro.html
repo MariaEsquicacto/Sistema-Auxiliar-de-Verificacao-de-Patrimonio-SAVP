@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <header></header>
+    <main>
+      <div class="logosenai">
+        <img src="../assets/logo_senai.png" alt="logosenai" p>
+            <h1>Formando quem forma a indústria.</h1>
+    </div>
+
+        <div class="formulariocadastro">
+            <form action="">
+              <div class="input-container">
+                <i class="bi bi-person"></i>
+                <input type="text" name="nome" id="nome" placeholder="Nome">
+              </div>
+
+              <div class="input-container">
+                <i class="bi bi-envelope"></i>
+                <input type="email" name="email" id="email" placeholder="Email">
+              </div>
+            
+              <div class="input-container">
+                <i class="bi bi-lock"></i>
+                <input type="password" name="senha" id="senha" placeholder="Senha">
+              </div>
+                <!-- Dropdown Cargo -->
+                <div class="select-container">
+                  <i class="bi bi-briefcase"></i>
+                  <select name="cargo" id="cargo">
+                    <option value="" disabled selected>Selecione o cargo</option>
+                    <option value="1">Gestor</option>
+                    <option value="2">Colaborador</option>
+                  </select>
+                </div>
+            </form>
+
+            <div class="button">
+                <button type="submit" onclick="cadastro()">CADASTRAR</button>
+            </div>
+        </div>
+
+       
+    </main>
+
+
+    <footer></footer>
+
+    <script>
+      function cadastro(){
+        window.location.href = 'home_admin.html'
+      }
+      function cadastrar() {
+        // Pegando valores dos campos (opcional)
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const cargo = document.getElementById("cargo").value;
+
+    if (!nome || !email || !cargo) {
+      alert("Por favor, preencha todos os campos!");
+      return false; // não envia
+    }
+
+      alert("✅ Cadastro realizado com sucesso!");
+      return false; // evita recarregar a página
+    }
+          </script>
+</body>
+</html>

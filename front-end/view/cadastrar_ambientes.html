@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/cadastrar_ambientes.css">
+    <title>Cadastrar Ambientes</title>
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <button class="hamburguer">
+                <div id="barra1" class="barra"></div>
+                <div id="barra2" class="barra"></div>
+                <div id="barra3" class="barra"></div>
+            </button>
+            <!-- <nav>
+                <ul>
+                    <div class="perfil">
+                        <img src="" alt="foto de perfil">
+                        <p>Colaborador</p>
+                    </div>
+                    <li><a href="estoque.php">Home</a></li>
+                    <li><a href="calendario.php">Ambientes</a></li>
+                    <li><a href="relatorio.php">Dashboard</a></li>
+                    <li><a href="#" id="logout-btn">Sair</a></li>
+                </ul>
+            </nav> -->
+        </div>
+        <div class="logo">
+            <img src="../assets/logo_senai.png" alt="logo-senai">
+        </div>
+        <div class="notificacao">
+            <i class="bi bi-bell"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="escrita">
+            <i class="bi bi-arrow-left" onclick="Voltar()"></i>
+            <h1>Cadastrar Ambientes</h1>
+        </div>
+
+        <div class="conteiner">
+            <form action="#" method="POST" class="register-form">
+                
+                <div class="form-group">
+                    <label for="room-name">Nome da sala:</label>
+                    <input type="text" id="room-name" name="room-name" class="form-control" placeholder="Ex: Laboratório de Usinagem">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoria:</label>
+                    <select id="category" name="category" class="form-control">
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="eletroeletronica">Eletroeletrônica</option>
+                        <option value="oficina">Oficina</option>
+                        <option value="quimica">Química</option>
+                        <option value="ti">T.I.</option>
+                        <option value="panificacao">Panificação</option>
+                        <option value="metalmecanica">Metalmecânica</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="room-code">Código:</label>
+                    <input type="text" id="room-code" name="room-code" class="form-control" placeholder="Ex: 4911359">
+                </div>
+
+            </form>
+           <button type="button" class="btn">Cadastrar</button> 
+        </div>
+         
+    </main>
+
+    <script>
+        function Voltar(){
+            window.location.href = 'home_admin.html'
+        }
+    </script>
+</body>
+</html>

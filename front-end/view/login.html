@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <title>Login</title>
+</head>
+<body>
+    <header></header>
+
+    <main>
+        <div class="logosenai">
+            <img src="../assets/logo_senai.png" alt="logosenai" p>
+                <h1>Formando quem forma a indústria.</h1>
+        </div>
+        
+
+        <div class="formulariologin">
+            <form action="">
+                <div class="input-container">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                  </div>
+                
+                  <div class="input-container">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" name="senha" id="senha" placeholder="Senha">
+                  </div>
+            </form>
+
+            <div class="esqueci-senha">
+               <a href="">Esqueci minha senha</a> 
+            </div>
+            
+            <div class="button">
+                <button type="button" onclick="Entrar()">ENTRAR</button>
+            </div>
+        </div>
+    </main>
+
+
+    <footer></footer>
+    <script>
+        function Entrar(){
+            window.location.href = 'home_admin.html';
+        }
+    </script>
+   
+</body>
+</html>

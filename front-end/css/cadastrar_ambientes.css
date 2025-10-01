@@ -2,164 +2,290 @@
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box; /* Adiciona box-sizing para facilitar o layout */
 }
 
 body {
   width: 100%;
-  height: 100%;
+  /* Altura mínima para garantir que o gradiente cubra a tela */
+  min-height: 100vh; 
   background: linear-gradient(to right, #940808, #ca1f1f);
-  overflow-y: hidden;
+  /* Remove 'height: 100%' e usa 'min-height: 100vh' para melhor compatibilidade */
+  overflow-x: hidden; /* Evita barra de rolagem lateral indesejada */
 }
 
 @media screen and (max-width: 468px) {
 
+  /* HEADER */
   header {
-    width: 100%;
-    height: 100px;
-    /* background-color: #940808;  */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    position: relative;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+      position: relative;
   }
 
   /* MENU HAMBÚRGUER */
   .hamburguer {
-    width: 25px;
-    height: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+      width: 25px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 100; /* Garante que o botão fique acima da navegação */
   }
 
   .barra {
-    width: 100%;
-    height: 4px;
-    background-color: #fff;
-    border-radius: 2px;
-    transition: 0.3s ease;
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: 0.3s ease;
   }
 
   /* LOGO CENTRALIZADA */
   .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
   }
 
   .logo img {
-    height: 40px;
+      height: 40px;
   }
 
   /* SINO NOTIFICAÇÃO */
   .notificacao i {
-    font-size: 22px;
-    color: #fff;
-    cursor: pointer;
-    margin-right: 25px;
+      font-size: 22px;
+      color: #fff;
+      cursor: pointer;
+      /* Reduz a margem para ficar mais balanceado */
+      margin-right: 0; 
   }
 
   /* ANIMAÇÃO DO HAMBÚRGUER VIRANDO "X" */
   .hamburguer.aberto #barra1 {
-    transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg) translate(5px, 5px);
   }
 
   .hamburguer.aberto #barra2 {
-    opacity: 0;
+      opacity: 0;
   }
 
   .hamburguer.aberto #barra3 {
-    transform: rotate(-45deg) translate(7px, -6px);
+      /* Ajustei um pouco a translação para o "X" ficar mais centralizado */
+      transform: rotate(-45deg) translate(5px, -5px); 
+  }
+  
+  /* NAVEGAÇÃO (MENU LATERAL) */
+  nav {
+      position: fixed; /* Usa fixed para cobrir toda a viewport */
+      top: 0; /* Começa no topo */
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background: linear-gradient(to bottom, #940808, #a71919); /* Gradiente vertical para consistência */
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 90; /* Abaixo do botão hamburguer */
+      padding-top: 100px; /* Adiciona padding para evitar que o conteúdo fique atrás do header */
+      /* overflow-y: auto; Adiciona scroll se o menu for muito grande */
   }
 
-  /* MAIN */
+  nav.ativo {
+      transform: translateX(0);
+  }
+
+  nav ul {
+      list-style: none;
+      padding: 0; /* Remove padding desnecessário */
+      margin: 0;
+  }
+
+  nav ul li {
+      /* Remove margin em li e usa padding/margin no cardmenu */
+      margin: 0;
+  }
+
+  nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block; /* Garante que o link ocupe todo o espaço */
+      padding: 10px 0;
+  }
+  
+  /* PERFIL E ITENS DO MENU */
+  .perfil {
+      width: 100%;
+      height: auto; /* Altura flexível */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 20px; /* Usa margin-bottom para espaçamento */
+      margin-top: 10px;
+      cursor: pointer;
+  }
+  .perfil img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%; /* Se for foto, use border-radius */
+  }
+  .editar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+  }
+  .editar p {
+      color: #fff;
+      font-size: 17px;
+      margin: 0; /* Remove margin padrão do p */
+  }
+
+  .itensmenu {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: flex-start; /* Alinha os itens à esquerda */
+      align-items: flex-start;
+      flex-direction: column;
+      margin-top: 30px; /* Reduzi um pouco a margem */
+  }
+  .cardmenu {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px; /* Adiciona padding para área de clique */
+      width: 100%;
+      cursor: pointer;
+  }
+  .cardmenu i {
+      margin: 10px 10px 10px 0; /* Ajusta margem para separação do texto */
+      color: #fff;
+      font-size: 24px; /* Tamanho mais padrão para ícones */
+  }
+  .cardmenu li {
+      margin: 0;
+  }
+  
+  /* SAIR */
+  .sair {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start; /* Alinha à esquerda */
+      align-items: center; /* Centraliza verticalmente */
+      padding: 10px 20px;
+      color: #fff;
+      cursor: pointer;
+      /* Usa margin-top em % para garantir que fique no final da tela */
+      margin-top: 50%; 
+  }
+  .sair p {
+      margin-left: 10px;
+      font-size: 17px;
+      margin: 0;
+  }
+  .sair i {
+      font-size: 20px;
+      margin-right: 10px;
+  }
+
+  /* MAIN CONTENT */
   main {
-    width: 100%;
-    height: 100vh;
-    /* display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column; */
-    background-color: #F8F8F8;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    /* padding: 1.3em; */
+      width: 100%;
+      /* Altura mínima para cobrir o conteúdo */
+      min-height: calc(100vh - 80px); 
+      background-color: #F8F8F8;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      /* Garante que o conteúdo comece abaixo do header */
+      position: relative; 
+      top: -20px; /* Move para cima para cobrir o gradiente do body */
+      padding: 20px 0; /* Adiciona padding vertical para o conteúdo não colar nas bordas */
+      overflow-y: auto; /* Permite scroll se o conteúdo for longo */
+      overflow-x: hidden;
   }
 
-
+  /* TÍTULO E BOTÃO VOLTAR */
   .escrita {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 30px 0px 10px 20px;
+      /* Define uma largura máxima para o alinhamento */
+      width: 100%; 
+      display: flex;
+      align-items: center;
+      
   }
-
+  
   .escrita h1 {
-    font-size: 20px;
-    padding: 5px 15px 0px;
+      font-size: 1.4rem;
   }
 
   .escrita i {
-    font-size: 30px;
+      font-size: 1.4rem;
+      cursor: pointer;
   }
-
-  #barra {
-    width: 280px;
-    height: 40px;
-  }
-
-  .conteiner{
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
-    align-items: center;
-    flex-direction: column;
-  }
-  .register-form{
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 30px;
-    width: 95%;
-    height: 400px;
-    padding: 30px;
-    height: auto;
-    background-color: #fff;
-    border-radius: 20px;
-    margin-top: 10%;
-  }
-  .form-group label{
-    font-size: 18px;
-    font-weight: 500;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  .form-group input{
-    border-radius: 10px;
-  }
-
-  .btn{
-    width: 300px;
-    height: 30px;
-    background-color: #940808;
-    color: #fff;
-    border-radius: 20px;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-  }
-
   
+  /* CORPO DO FORMULÁRIO */
+  .conteiner {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0 15px; /* Adiciona padding lateral para não colar nas bordas */
+  }
+  
+  .register-form {
+      /* Removendo grid-template-rows desnecessário */
+      display: flex; 
+      flex-direction: column; /* Organiza os itens em coluna */
+      width: 100%; /* Ocupa a largura total do container */
+      max-width: 400px; /* Limite máximo para tablets */
+      height: auto;
+      padding: 0 20px 0 20px;
+      background-color: #fff;
+      border-radius: 15px; /* Reduzi um pouco o border-radius */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar */
+  }
+  
+  .form-group label {
+      font-size: 1.2rem; /* Tamanho mais legível */
+      font-weight: 600; /* Aumenta a espessura da fonte */
+      display: block; /* Garante que a label ocupe a linha toda */
+      font-family: Arial, Helvetica, sans-serif; /* Consistência */
+  }
+  .form-group input,
+  .form-group select { /* Aplica o estilo também ao select */
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box; /* Essencial para que o padding não aumente a largura */
+  }
 
-
+  .btn {
+      width: 100%;
+      max-width: 300px;
+      height: 45px; /* Aumenta a altura para facilitar o toque */
+      background-color: #940808;
+      color: #fff;
+      border: none; /* Remove a borda padrão do botão */
+      border-radius: 25px; /* Mais arredondado */
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 15px auto 0; /* Centraliza e ajusta a margem */
+  }
+  
+  .btn:hover {
+      background-color: #a71919; /* Efeito ao passar o mouse */
+  }
 }

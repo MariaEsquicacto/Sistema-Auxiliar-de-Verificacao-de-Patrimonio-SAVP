@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/ambientes.css">
+    <title>Ambientes</title>
+    <style>
+        .escrita{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sair{
+            width: 100%;
+            height: 350px;
+           margin-top: 0;
+           display: flex;
+           justify-content: start;
+           align-items: end;
+        }
+        .sair i{
+            font-size: 30px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <button class="hamburguer">
+                <div id="barra1" class="barra"></div>
+                <div id="barra2" class="barra"></div>
+                <div id="barra3" class="barra"></div>
+            </button>
+            <nav>
+                <ul>
+                    <div class="perfil" onclick="Perfil()">
+                        <img src="../assets/man.png" alt="foto de perfil">
+                        <div class="editar">
+                            <p>Administrador</p><i class="bi bi-pencil" style="color: #fff; margin-left: 5px;"></i>
+                        </div>
+                    </div>
+                    <div class="itensmenu">
+
+                        <div class="cardmenu">
+                            <i class="bi bi-house-door"></i>
+                            <li><a href="ambientes.html">Ambientes</a></li>
+                        </div>
+                    </div>
+                    <div class="sair" onclick="Sair()">
+                        <i class="bi bi-box-arrow-right" style="margin-left: 5px;"></i>
+                        <p>Sair</p>
+                    </div>
+
+                </ul>
+            </nav>
+        </div>
+        <div class="logo">
+            <img src="../assets/logo_senai.png" alt="logo-senai">
+        </div>
+        <div class="notificacao">
+            <i class="bi bi-bell"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="escrita">
+            <!-- <i class="bi bi-arrow-left" onclick="Voltar()"></i> -->
+            <h1>Ambientes</h1>
+        </div>
+
+
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Pesquisar Ambiente..." aria-label="Search"
+                id="barra" />
+            <button class="btn btn-outline" type="submit" style="background-color: #940808; color:#fff;"><i
+                    class="bi bi-search"></i></button>
+        </form>
+
+        <div class="ambientes-card" id="lista-ambientes">
+        </div>
+
+    </main>
+
+    <script defer>
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+    // Evita reload do form
+    document.querySelector('form').addEventListener('submit', e => e.preventDefault());
+
+    function Voltar() {
+        window.location.href = 'home_admin.html';
+    }
+
+    const hamburguer = document.querySelector(".hamburguer");
+    const nav = document.querySelector("nav");
+
+    hamburguer.addEventListener("click", () => {
+        hamburguer.classList.toggle("aberto");
+        nav.classList.toggle("ativo");
+    });
+
+    const categoriaIcones = {
+        "eletroeletronica": "bi bi-lightning-charge",
+        "panificacao": "bi bi-basket",
+        "oficina": "bi bi-gear",
+        "quimica": "bi bi-flask",
+        "metalmecanica": "bi bi-tools",
+        "ti": "bi bi-display"
+    };
+
+    let ambientesCarregados = [];
+
+    async function carregarAmbientes() {
+        try {
+            const response = await fetch("../../back-end/Get/Get_ambientes.php");
+            const result = await response.json();
+            console.log("Result:", result);
+
+            const lista = document.getElementById("lista-ambientes");
+            if (!lista) return;
+
+            lista.innerHTML = "";
+
+            if (result.status === "success") {
+                ambientesCarregados = result.data;
+                renderizarAmbientes(result.data);
+            } else {
+                alert("❌ Erro: " + result.message);
+            }
+        } catch (error) {
+            alert("⚠️ Erro ao carregar ambientes: " + error.message);
+        }
+    }
+
+    function renderizarAmbientes(ambientes) {
+        const lista = document.getElementById("lista-ambientes");
+        if (!lista) return;
+
+        lista.innerHTML = "";
+        ambientes.forEach(amb => {
+            const icone = categoriaIcones[amb.categoria.toLowerCase()] || "bi bi-display";
+
+            lista.innerHTML += `
+                <div class="conteiners" onclick="Scanear()">
+                    <i class="${icone}"></i>
+                    <div class="texto">
+                        <p>${amb.ambiente_nome}</p>
+                        <p>${amb.localizacao}</p>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Pesquisa em tempo real
+    const barra = document.getElementById("barra");
+    barra.addEventListener("input", function () {
+        const termo = this.value.toLowerCase();
+        const filtrados = ambientesCarregados.filter(amb =>
+            amb.ambiente_nome.toLowerCase().includes(termo) ||
+            (String(amb.localizacao || "")).toLowerCase().includes(termo)
+        );
+        renderizarAmbientes(filtrados);
+    });
+
+    carregarAmbientes();
+
+});
+
+
+    // função de pesquisa
+    document.getElementById("barra").addEventListener("input", function () {
+        const termo = this.value.toLowerCase();
+        const filtrados = ambientesCarregados.filter(amb =>
+            amb.ambiente_nome.toLowerCase().includes(termo) ||
+            (String(amb.localizacao || "")).toLowerCase().includes(termo)
+
+        );
+        renderizarAmbientes(filtrados);
+    });
+
+    document.addEventListener("DOMContentLoaded", carregarAmbientes);
+
+    function Perfil(){
+        window.location.href = "perfil_c.html"
+    }
+    
+
+    </script>
+</body>
+
+</html>

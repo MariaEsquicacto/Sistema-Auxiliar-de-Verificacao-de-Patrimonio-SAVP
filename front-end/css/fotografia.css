@@ -76,6 +76,95 @@ body {
     .hamburguer.aberto #barra3 {
         transform: rotate(-45deg) translate(7px, -6px);
     }
+    nav {
+        position: absolute;
+        top: 100px;
+        /* logo abaixo do header */
+        left: 0;
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(to right, #940808, #a71919);
+        /* background-color: #ca1f1f; */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    nav.ativo {
+        transform: translatey(0);
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 20px;
+    }
+
+    nav ul li {
+        margin: 15px 0;
+    }
+
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .perfil{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .perfil img{
+        width: 60px;
+        height: 60px;
+    }
+    .editar{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .editar p{
+        color: #fff;
+        font-size: 17px;
+    }
+
+    .itensmenu{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+    .cardmenu{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cardmenu i{
+        margin: 10px;
+        color: #fff;
+        font-size: 30px;
+    }
+    .sair{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        padding: 10px;
+        margin-top: 90%;
+        color: #fff;
+    }
+    .sair p{
+        margin-left: 10px;
+        font-size: 17px;
+    }
+    .sair i{
+        font-size: 20px;
+    }
 
     /* MAIN */
     main {

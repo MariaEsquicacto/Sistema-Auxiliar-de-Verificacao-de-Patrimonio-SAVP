@@ -1,0 +1,185 @@
+/* =========  GERAL DA PÁGINA DE RELATÓRIO ========= */
+body {
+    background: #f4f4f4; /* tom cinza claro do layout */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* ====== CABEÇALHO SUPERIOR ====== */
+  header {
+    background: #b60000; /* vermelho do topo SENAI */
+    padding: 10px 15px;
+  }
+  
+  .header-colaborador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 32px;
+  }
+  
+  .notificacao i {
+    color: white;
+    font-size: 1.7rem;
+  }
+
+  /* ========= CONTEÚDO RELATÓRIO ========= */
+  .conteudo-relatorio {
+    padding: 20px;
+  }
+  
+  /* título + seta voltar */
+  .cabecalho-relatorio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .btn-voltar {
+    background: none;
+    border: none;
+    color: #4a4a4a;
+    font-size: 1.3rem;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .cabecalho-relatorio h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin: 0;
+  }
+  
+  /* ========= FILTROS ========= */
+  .filtros {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  
+  .icone-filtro {
+    font-size: 1.4rem;
+    color: #7a7a7a;
+  }
+  
+  /* estilo dos selects como “pílulas” */
+  .filtros select {
+    background: #b60000;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    appearance: none;           /* remove seta padrão */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='5'><polygon points='0,0 10,0 5,5' fill='white'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 5px;
+  }
+  
+  .filtros select:focus {
+    outline: none;
+  }
+  
+  /* ========= CARDS DE EXPORTAÇÃO ========= */
+  .cards-export {
+    display: flex;
+    flex-direction: column  ;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .cards-export .card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 30px 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .cards-export .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  .cards-export .card i {
+    display: block;
+    font-size: 2.4rem;
+    color: #b60000;
+    margin-bottom: 10px;
+  }
+  
+  .cards-export .card span {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #4a4a4a;
+  }
+  
+  /* Ícones com cores específicas (opcional) */
+  .cards-export .card.excel i { color: #2e7d32; }
+  .cards-export .card.csv i   { color: #d32f2f; }
+  
+  .btn-voltar i,
+.icone-filtro {
+  font-size: 1.4rem;  /* tamanho da seta e do funil */
+}
+
+.cards-export .card i {
+  font-size: 3.6rem;  /* ícones grandes nos cards */
+  margin-bottom: 8px;
+  color: #b60000;     /* vermelho SENAI */
+}
+.cards-export a {
+    text-decoration: none;      /* remove sublinhado */
+    color: inherit;             /* usa a cor original do texto/ícone */
+    display: flex;              /* mantém layout de card */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 35%;               /* ajuste para o tamanho do card */
+    height: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 4px 4px 6px #cfcfcf;
+    margin: 10px;
+    transition: transform .3s ease;
+}
+
+.cards-export a:hover {
+    transform: scale(1.05);
+}
+
+
+.hamburguer {
+    width: 25px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburguer i{
+    color: white;
+    font-size: 2.3rem;
+    transition: transform .2s linear;
+  }
+
+  .hamburguer i:hover{
+    transform: scale(1.2);
+  }
+
+ 

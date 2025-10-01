@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/relatorio.css">
+    <link rel="stylesheet" href="../css/relatorio_excel.css">
+    <title>Relatório</title>
+</head>
+<body>
+    <header>
+        <div class="header-colaborador">
+        <div class="menu">
+            <button class="hamburguer">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div class="logo">
+            <img src="../assets/logo_senai.png" alt="logo-senai">
+        </div>
+        <div class="notificacao">
+            <i class="bi bi-bell"></i>
+        </div>
+    </div>
+    </header>
+    <main class="conteudo-relatorio">
+
+        <div class="titulo-relatorio">
+            <a href="relatorio.html" class="voltar"><i class="fa-solid fa-arrow-left"></i></a>
+            <h1>Relatório Excel</h1>
+        </div>
+    
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID_SETOR</th>
+                        <th>NOME</th>
+                        <th>DESCRICAO</th>
+                        <th>CODIGO</th>
+                        <th>STATUS</th>
+                        <th>ANEXO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td><td>1</td><td>Computador</td><td>Monitor Dell</td>
+                        <td class="ok">1015978</td>
+                        <td><i class="fa-solid fa-circle-check verde"></i></td>
+                        <td><i class="fa-solid fa-paperclip"></i></td>
+                    </tr>
+                    <tr>
+                        <td>2</td><td>1</td><td>Impressora</td><td>Impressora Dell</td>
+                        <td class="aviso">1015978</td>
+                        <td><i class="fa-solid fa-triangle-exclamation amarelo"></i></td>
+                        <td><i class="fa-solid fa-paperclip"></i></td>
+                    </tr>
+                    <tr>
+                        <td>3</td><td>2</td><td>Mesa</td><td>Mesa do professor</td>
+                        <td class="erro">1015978</td>
+                        <td><i class="fa-solid fa-circle-xmark vermelho"></i></td>
+                        <td><i class="fa-solid fa-paperclip"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="botoes-relatorio">
+            <button id="btn-baixar">Baixar Excel</button>      
+            <button class="btn-exportar">Exportar</button>
+        </div>
+    
+    </main>
+    
+    
+    <script>
+        document.getElementById('btn-baixar').addEventListener('click', function() {
+            let table = document.querySelector('table');
+            let rows = table.querySelectorAll('tr');
+            let csvContent = '';
+        
+            rows.forEach(row => {
+                let cols = row.querySelectorAll('th, td');
+                let rowData = [];
+                cols.forEach(col => {
+                    // Detecta Status
+                    if (col.querySelector('.fa-circle-check')) rowData.push('Ativo');
+                    else if (col.querySelector('.fa-triangle-exclamation')) rowData.push('Atencao');
+                    else if (col.querySelector('.fa-circle-xmark')) rowData.push('Inativo');
+                    // Detecta Anexo
+                    else if (col.querySelector('.fa-paperclip')) rowData.push('Sim');
+                    else rowData.push(col.innerText.trim());
+                });
+                csvContent += rowData.join(';') + '\n';
+            });
+        
+            // Cria um blob CSV
+            let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+        
+            // Pega data/hora atual e formata YYYYMMDD_HHMMSS
+            let now = new Date();
+            let pad = (n) => n.toString().padStart(2, '0');
+            let dateStr = now.getFullYear() +
+                          pad(now.getMonth()+1) +
+                          pad(now.getDate()) + '_' +
+                          pad(now.getHours()) +
+                          pad(now.getMinutes()) +
+                          pad(now.getSeconds());
+        
+            link.download = `relatorio_${dateStr}.csv`; // nome com data/hora
+            link.click();
+        });
+        </script>        
+    
+</body>
+</html>

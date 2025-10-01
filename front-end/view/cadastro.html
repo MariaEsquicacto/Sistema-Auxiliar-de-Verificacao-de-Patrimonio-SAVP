@@ -1,76 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/cadastro.css?V2.0">
     <title>Cadastro</title>
 </head>
+
 <body>
     <header></header>
     <main>
-      <div class="logosenai">
-        <img src="../assets/logo_senai.png" alt="logosenai" p>
+        <div class="logosenai">
+            <img src="../assets/logo_senai.png" alt="logosenai" p>
             <h1>Formando quem forma a indústria.</h1>
-    </div>
-
-        <div class="formulariocadastro">
-            <form action="">
-              <div class="input-container">
-                <i class="bi bi-person"></i>
-                <input type="text" name="nome" id="nome" placeholder="Nome">
-              </div>
-
-              <div class="input-container">
-                <i class="bi bi-envelope"></i>
-                <input type="email" name="email" id="email" placeholder="Email">
-              </div>
-            
-              <div class="input-container">
-                <i class="bi bi-lock"></i>
-                <input type="password" name="senha" id="senha" placeholder="Senha">
-              </div>
-                <!-- Dropdown Cargo -->
-                <div class="select-container">
-                  <i class="bi bi-briefcase"></i>
-                  <select name="cargo" id="cargo">
-                    <option value="" disabled selected>Selecione o cargo</option>
-                    <option value="1">Gestor</option>
-                    <option value="2">Colaborador</option>
-                  </select>
-                </div>
-            </form>
-
-            <div class="button">
-                <button type="submit" onclick="cadastro()">CADASTRAR</button>
-            </div>
         </div>
 
-       
+        <div class="formulariocadastro">
+            <div class="escrita">
+                <h1>Cadastrar Usuários</h1>
+                <i class="bi bi-arrow-right" style="color: #777777;" onclick="Voltar()"></i>
+            </div>
+            <form id="formCadastro">
+                <div class="input-container">
+                    <i class="bi bi-person"></i>
+                    <input type="text" name="nome" id="nome" placeholder="Nome">
+                </div>
+
+                <div class="input-container">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                </div>
+
+                <div class="input-container">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" name="senha" id="senha" placeholder="Senha">
+                </div>
+                
+                <div class="select-container">
+                    <i class="bi bi-briefcase"></i>
+                    <select name="cargo" id="cargo">
+                        <option value="" disabled selected>Selecione o cargo</option>
+                        <option value="gestor">Gestor</option>
+                        <option value="colaborador">Colaborador</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                </div>
+
+                <div class="button">
+                    <button type="submit">CADASTRAR</button>
+                </div>
+            </form>
+        </div>
     </main>
-
-
-    <footer></footer>
-
     <script>
-      function cadastro(){
-        window.location.href = 'home_admin.html'
-      }
-      function cadastrar() {
-        // Pegando valores dos campos (opcional)
-        const nome = document.getElementById("nome").value;
-        const email = document.getElementById("email").value;
-        const cargo = document.getElementById("cargo").value;
+        document.getElementById("formCadastro").addEventListener("submit", async function (e) {
+            e.preventDefault(); // impede recarregar a página
 
-    if (!nome || !email || !cargo) {
-      alert("Por favor, preencha todos os campos!");
-      return false; // não envia
-    }
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+            const cargo = document.getElementById("cargo").value; // Agora o valor é a string correta
 
-      alert("✅ Cadastro realizado com sucesso!");
-      return false; // evita recarregar a página
-    }
-          </script>
+            // Verifica se o cargo foi selecionado
+            if (!cargo) {
+                alert("❌ Por favor, selecione o cargo do novo usuário.");
+                return;
+            }
+
+            // Monta o JSON esperado pelo PHP
+            const data = {
+                usuario_nome: nome,
+                usuario_email: email,
+                senha: senha,
+                usuario_nivel: cargo, 
+                usuario_del: "ativo"
+            };
+            
+            // O token de login do administrador (usuário atual)
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                alert("❌ Usuário não autenticado. Faça login novamente.");
+                window.location.href = "login.html"; // Redireciona para login
+                return;
+            }
+
+            try {
+                const response = await fetch("../../back-end/Post/Post_usuario.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // ESSENCIAL: Envia o token para autenticar o administrador
+                        "Authorization": `Bearer ${token}` 
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                // ⚠️ Se o status for 403, o PHP negou a permissão.
+                if (response.status === 403) {
+                    alert("❌ Acesso Negado: Apenas administradores podem cadastrar novos usuários.");
+                    return; 
+                }
+
+                if (result.status === "success") {
+                    alert("✅ " + result.message);
+                    document.getElementById("formCadastro").reset();
+                    // Redireciona de volta para a home admin (ou deixa na mesma tela)
+                    window.location.href = "home_admin.html"; 
+                } else {
+                    alert("❌ " + result.message);
+                }
+            } catch (error) {
+                alert("⚠️ Erro na requisição: " + error.message);
+            }
+        });
+
+        function Voltar(){
+            window.location.href = 'home_admin.html'
+        }
+    </script>
 </body>
+
 </html>

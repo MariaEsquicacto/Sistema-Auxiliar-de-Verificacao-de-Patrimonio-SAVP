@@ -1,0 +1,373 @@
+/* ============ GERAL ============ */
+body {
+    background: #f4f4f4;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo na horizontal */
+    align-items: flex-start; /* Alinha o conteúdo ao topo na vertical */
+    min-height: 100vh; /* Garante que o body ocupa a altura total da viewport */
+}
+
+/* Container principal para centralizar e dar um aspecto de card grande */
+.conteudo-relatorio {
+    padding: 20px;
+  }
+  
+  /* título + seta voltar */
+  .cabecalho-relatorio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .btn-voltar {
+    background: none;
+    border: none;
+    color: #4a4a4a;
+    font-size: 1.3rem;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .cabecalho-relatorio h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin: 0;
+  }
+
+/* ============ CABEÇALHO SUPERIOR (Vermelho) ============ */
+header {
+    background: #b60000; /* vermelho do topo SENAI */
+    padding: 10px 15px;
+    position: fixed; /* Fixa o cabeçalho no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header-colaborador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px; /* Alinha com o conteúdo principal */
+    margin: 0 auto; /* Centraliza o conteúdo do header */
+}
+
+.logo img {
+    height: 32px;
+}
+
+.notificacao i, .hamburguer i {
+    color: white;
+    font-size: 1.7rem;
+}
+
+.hamburguer {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+/* ============ CARDS DE RESUMO ============ */
+.cards-resumo {
+    display: flex;
+    flex-direction: column; /* Empilha em celulares */
+    gap: 15px;
+    padding: 0 20px;
+    margin-bottom: 25px;
+}
+
+.card-patrimonio {
+    background: #e0e0e0; /* Fundo cinza claro */
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card-patrimonio p {
+    margin: 0 0 5px 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.card-patrimonio span {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.grafico-legenda {
+    display: flex;
+    flex-direction: column; /* Empilha em celulares */
+    align-items: center;
+    background: #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.legenda {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px; /* Espaço entre legenda e gráfico */
+    align-items: flex-start; /* Alinha a legenda à esquerda */
+    width: 100%;
+}
+
+.item-legenda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cor-legenda {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cor-legenda.verde { background-color: #98EE64; }
+.cor-legenda.amarelo { background-color: #FFED4D; }
+.cor-legenda.vermelho { background-color: #FF5E5E; }
+
+.item-legenda p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+}
+
+.grafico-pizza img {
+    width: 150px; /* Tamanho do gráfico */
+    height: 150px;
+    border-radius: 50%; /* Para simular a forma de um gráfico de pizza */
+    object-fit: cover;
+    /* As cores do placeholder são: 98EE64 (verde), FFED4D (amarelo) */
+    /* Você usaria um SVG real ou uma biblioteca JS para um gráfico dinâmico */
+}
+
+/* ============ TABELA DE DETALHES ============ */
+.tabela-container {
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+    padding: 0 20px;
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o border-radius seja aplicado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.85rem;
+    white-space: nowrap; /* Impede que o texto quebre */
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Estilos de Status na Tabela */
+.status-verde { color: #28a745; }
+.status-amarelo { color: #ffc107; }
+.status-vermelho { color: #dc3545; }
+
+td i {
+    font-size: 1.1rem;
+}
+
+/* ============ BOTÃO DE AÇÃO ============ */
+.btn-salvar {
+    background: #b60000; /* Vermelho SENAI */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: calc(100% - 40px); /* Ocupa a largura total com padding */
+    max-width: 360px; /* Limita a largura máxima */
+    display: block; /* Garante que ocupe a largura total */
+    margin: 0 auto 20px auto; /* Centraliza e adiciona margem inferior */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #9c0000;
+}
+
+/* ============ MEDIA QUERIES para telas maiores (desktop, tablets) ============ */
+/* Basicamente, o design inicial já é para mobile-first, então aqui ajustamos para desktop */
+@media (min-width: 769px) {
+    .conteudo-dashboard {
+        max-width: 900px; /* Aumenta a largura máxima para telas maiores */
+        margin-top: 30px;
+    }
+
+    .header-colaborador {
+        max-width: 900px;
+    }
+
+    .cards-resumo {
+        flex-direction: row; /* Volta a alinhar os cards lado a lado */
+        justify-content: space-between;
+    }
+
+    .card-patrimonio {
+        flex: 1; /* Ocupa o espaço disponível */
+        margin-right: 15px; /* Espaço entre o card e o gráfico */
+    }
+
+    .grafico-legenda {
+        flex-direction: row; /* Legenda e gráfico lado a lado */
+        flex: 1;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .legenda {
+        width: auto; /* Deixa a largura automática */
+        margin-bottom: 0;
+    }
+
+    .tabela-container {
+        padding: 0 20px;
+    }
+
+    .btn-salvar {
+        max-width: 250px; /* Botão menor em desktop */
+    }
+}
+
+/* ============ CARDS DE RESUMO ============ */
+/* ... (Mantenha o CSS anterior dos cards-resumo) ... */
+
+.grafico-legenda {
+    display: flex;
+    flex-direction: column; /* Empilha em celulares */
+    align-items: center;
+    background: #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.legenda {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px; /* Espaço entre legenda e gráfico */
+    align-items: flex-start; /* Alinha a legenda à esquerda */
+    width: 100%;
+}
+
+.item-legenda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cor-legenda {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cor-legenda.verde { background-color: #98EE64; }
+.cor-legenda.amarelo { background-color: #FFED4D; }
+.cor-legenda.vermelho { background-color: #FF5E5E; }
+
+.item-legenda p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+}
+
+/* --- ESTILOS DO GRÁFICO DE PIZZA --- */
+.grafico-pizza {
+    position: relative;
+    width: 150px; /* Tamanho total do gráfico */
+    height: 150px;
+    border-radius: 50%; /* Faz com que o container seja redondo */
+    background-color: #f0f0f0; /* Cor de fundo para garantir que não haja "buraco" */
+    overflow: hidden; /* Garante que as fatias não saiam do círculo */
+    border: 1px solid #ccc; /* Borda leve para definir o círculo */
+}
+
+/* Cada fatia do gráfico */
+.grafico-pizza .fatia {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Fatias também são redondas */
+    transform-origin: center center; /* Ponto de rotação */
+}
+
+/* As cores e as rotações para cada fatia */
+.fatia-verde {
+    background-color: #98EE64; /* Verde */
+    /* 50% da pizza */
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    /* Ou, se for uma fatia que começa no topo e vai até a metade */
+    /* O clip-path é mais flexível para fatias não-convencionais */
+    /* Para uma fatia verde de 50%, podemos usar o background gradient */
+    background: conic-gradient(#98EE64 0% 50%, transparent 50% 100%);
+    transform: rotate(0deg); /* Começa no topo */
+}
+
+.fatia-amarela {
+    background-color: #FFED4D; /* Amarelo */
+    /* Para 25% da pizza, começa onde a verde termina (50%) */
+    background: conic-gradient(transparent 0% 50%, #FFED4D 50% 75%, transparent 75% 100%);
+    transform: rotate(0deg); /* Alinha com a verde */
+}
+
+.fatia-vermelha {
+    background-color: #FF5E5E; /* Vermelho */
+    /* Para os últimos 25% da pizza, começa onde a amarela termina (75%) */
+    background: conic-gradient(transparent 0% 75%, #FF5E5E 75% 100%);
+    transform: rotate(0deg); /* Alinha com as outras */
+}
+
+
+.grafico-pizza {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #98EE64 0% 50%,    
+        #FFED4D 50% 75%,    
+        #FF5E5E 75% 100%    
+    );
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
